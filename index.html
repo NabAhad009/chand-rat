@@ -92,7 +92,6 @@ p{
     line-height:1.6;
 }
 
-/* Button */
 button{
     margin-top:10px;
     padding:12px 25px;
@@ -109,7 +108,6 @@ button:hover{
     transform:scale(1.08);
 }
 
-/* Message */
 .message{
     margin-top:20px;
     opacity:0;
@@ -121,6 +119,22 @@ button:hover{
 
 .show{
     opacity:1;
+}
+
+/* Eid Section */
+.eid-section{
+    display:none;
+    text-align:center;
+}
+
+.hug{
+    font-size:50px;
+    animation:hugAnim 2s infinite;
+}
+
+@keyframes hugAnim{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
 }
 
 /* Hearts */
@@ -135,17 +149,9 @@ button:hover{
     100%{transform:translateY(-200px); opacity:0;}
 }
 
-/* Mobile tweaks */
 @media(max-width:480px){
     h1{font-size:20px;}
     .name{font-size:18px;}
-    p{font-size:14px;}
-    .moon{
-        width:70px;
-        height:70px;
-        top:4%;
-        right:5%;
-    }
 }
 </style>
 </head>
@@ -153,7 +159,7 @@ button:hover{
 
 <div class="moon"></div>
 
-<div class="card">
+<div class="card" id="mainCard">
     <h1>🌙 Chand Raat Mubarak</h1>
 
     <p>
@@ -163,9 +169,30 @@ button:hover{
 
     <p class="name">But my moon is you, Nabiha 💖</p>
 
-    <button onclick="startLove()">Reveal Now 💌</button>
+    <button onclick="startLove()">Tap here 💌</button>
 
     <div class="message" id="msg"></div>
+
+    <button id="eidBtn" style="display:none;" onclick="showEid()">Open Eid Surprise 🌙✨</button>
+</div>
+
+<!-- Eid Section -->
+<div class="card eid-section" id="eidSection">
+    <h1>🌙 Eid Mubarak Nabiha 💖</h1>
+
+    <div class="hug">👩‍❤️‍👨</div>
+
+    <p>
+        Eid Mubarak to the most special person in my life ❤️<br><br>
+
+        I wish I could hug you for real today…<br>
+        but until then, sending you all my love through this 🤗<br><br>
+
+        May your smile always shine brighter than the moon ✨<br>
+        and may we celebrate many Eids together 💖<br><br>
+
+        — Yours forever, Ahad 💌
+    </p>
 </div>
 
 <script>
@@ -191,7 +218,7 @@ because my moon is right here in my life ❤️
 You are not just as beautiful as the moon...
 you are the light that makes all my nights brighter ✨
 
-No matter how far or near we are,
+No matter what happens,
 you will always be my Chand 🌙
 
 — Yours, Ahad 💌`;
@@ -206,9 +233,18 @@ function startLove(){
         let interval=setInterval(()=>{
             msg.innerHTML += text.charAt(i);
             i++;
-            if(i>=text.length) clearInterval(interval);
+            if(i>=text.length){
+                clearInterval(interval);
+                document.getElementById("eidBtn").style.display="inline-block";
+            }
         },35);
     }
+}
+
+/* Show Eid Section */
+function showEid(){
+    document.getElementById("mainCard").style.display="none";
+    document.getElementById("eidSection").style.display="block";
 }
 
 /* Hearts */
